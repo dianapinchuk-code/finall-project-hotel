@@ -1,0 +1,23 @@
+namespace Domain.Categories;
+
+public class Category
+{
+    public CategoryId Id { get; }
+    public string Name { get; private set; }
+    public DateTime CreatedAt { get; }
+
+    private Category(CategoryId id, string name, DateTime createdAt)
+    {
+        Id = id;
+        Name = name;
+        CreatedAt = createdAt;
+    }
+
+    public static Category New(CategoryId id, string name)
+        => new(id, name, DateTime.UtcNow);
+
+    public void UpdateName(string name)
+    {
+        Name = name;
+    }
+}
