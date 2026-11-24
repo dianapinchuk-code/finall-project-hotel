@@ -20,19 +20,21 @@ public class Room
         string title,
         string description,
         DateTime createdAt,
-        DateTime? updatedAt,
-        RoomAttributes attributes)
+        DateTime? updatedAt)
     {
         Id = id;
         Title = title;
         Description = description;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
-        Attributes = attributes;
+        Attributes = RoomAttributes.Empty();
     }
 
     public static Room New(RoomId id, string title, string description, RoomAttributes? attributes = null)
-        => new(id, title, description, DateTime.UtcNow, null, attributes ?? RoomAttributes.Empty());
+        => new(id, title, description, DateTime.UtcNow, null)
+        {
+            Attributes = attributes ?? RoomAttributes.Empty()
+        };
 
     public void UpdateDetails(string title, string description, RoomAttributes? attributes = null)
     {
